@@ -76,3 +76,49 @@
      });
 
  }
+
+//  search processing
+
+const searchBox = document.querySelector('#search-box'),
+      feedBack = document.querySelector('.feed-back')
+
+
+searchBox.onfocus = function(){
+    if(!searchBox.classList.contains('active')){
+        feedBack.classList.add('active')
+    }
+}
+document.body.onclick = function(event){
+     if(event.target !== searchBox){
+         feedBack.classList.remove('active')
+     }
+
+    
+}
+searchBox.onkeyup = function(){
+    let key = this.value
+
+}
+
+function search(key){
+    const url = "getdatasearch.php"
+    const method = "POST"
+    let data = {key : key}
+
+    fetch(url,{
+        method : method,
+        headers: {
+            "Content-Type" : 'application/json;charset=UTF-8',
+            "Accept" : 'application/json;charset=UTF-8'
+        },
+        body: JSON.stringify(data)
+    }).then(response => response.json())
+    .then(function(data){
+       let result = ""
+       data.forEach( e =>{
+           result += `<div class="border-bottom p-2">${e.product_name}</div>`
+       })
+       
+       feedBack.innerHTML = result
+    })
+}

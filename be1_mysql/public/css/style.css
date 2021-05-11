@@ -1,0 +1,21 @@
+body{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+form{
+    margin-bottom: 200px;
+}
+.feed-back{
+    margin-top: 8px;
+    box-shadow: 1px 1px 5px rgba(0,0,0,.3);
+    border-radius: 5px;
+    min-height: 150px;
+    box-sizing: border-box;
+    padding: 12px;
+}
+
+.feed-back:not(.active){
+    display: none;
+}

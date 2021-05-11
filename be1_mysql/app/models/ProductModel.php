@@ -36,7 +36,7 @@ class ProductModel extends Db
         $sql->bind_param('i', $categoryId);
         return parent::select($sql);
     }
-    
+
     // Tìm sản phẩm theo từ khóa
     public function searchProducts($keyword)
     {
@@ -61,7 +61,7 @@ class ProductModel extends Db
         $sql->bind_param('ssis', $productName, $productDescription, $productPrice, $productPhoto);
         return $sql->execute();
     }
-    
+
     // Cập nhật sản phẩm
     public function updateProduct($productName, $productDescription, $productPrice, $productPhoto, $id)
     {
@@ -92,5 +92,12 @@ class ProductModel extends Db
         $sql->bind_param('i', $id);
         return $sql->execute();
     }
+
+    public function getProductNameByKey($key)
+    {
+        $keySearch = "%$key%";
+        $sql = parent::$connection->prepare("SELECT product_name FROM products WHERE product_name LIKE ?");
+        $sql->bind_param('s', $keySearch);
+        return parent::select($sql);
+    }
 }
-    
